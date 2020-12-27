@@ -155,7 +155,7 @@ namespace Stock
             }
             else
             {
-                MessageBox.Show("Ürün Bulunamadı...");
+                MessageBox.Show("Ürün Bulunamadı");
 
             }
 
