@@ -25,36 +25,41 @@ namespace Stock
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //sql baglantısı
-            string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
-            SqlConnection conn = new SqlConnection(constring);
-            conn.Open();
-            //Ekleme islemi
-
-            bool status;
-            if (comboBox1.SelectedIndex == 0) { status = true; }
-            else { status = false; }
-
-            string sqlcommand;
-            if (ProductExists(conn, idtext.Text))
+            if (Validation())
             {
-                sqlcommand = "UPDATE [dbo].[Ürünler] SET" +
-                    "[ÜrünAd] = '" + isimtext.Text + "'" +
-                    ",[ÜrünBilgi] ='" + status + "'" +
-                    "WHERE [ÜrünId] = '" + idtext.Text + "'";
+                //sql baglantısı
+                string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
+                SqlConnection conn = new SqlConnection(constring);
+                conn.Open();
+                //Ekleme islemi
+
+                bool status;
+                if (comboBox1.SelectedIndex == 0) { status = true; }
+                else { status = false; }
+
+                string sqlcommand;
+                if (ProductExists(conn, idtext.Text))
+                {
+                    sqlcommand = "UPDATE [dbo].[Ürünler] SET" +
+                        "[ÜrünAd] = '" + isimtext.Text + "'" +
+                        ",[ÜrünBilgi] ='" + status + "'" +
+                        "WHERE [ÜrünId] = '" + idtext.Text + "'";
+                }
+                else
+                {
+                    sqlcommand = "INSERT INTO[dbo].[Ürünler] ([ÜrünID],[ÜrünAd],[ÜrünBilgi])" +
+                   " VALUES ('" + idtext.Text + "','" + isimtext.Text + "','" + status + "')";
+
+                }
+
+
+                SqlCommand cmd = new SqlCommand(sqlcommand, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                LoadData();
+                ResetRecords();
             }
-            else
-            {
-                sqlcommand = "INSERT INTO[dbo].[Ürünler] ([ÜrünID],[ÜrünAd],[ÜrünBilgi])" +
-               " VALUES ('" + idtext.Text + "','" + isimtext.Text + "','" + status + "')";
 
-            }
-
-
-            SqlCommand cmd = new SqlCommand(sqlcommand, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            LoadData();
 
 
 
@@ -75,8 +80,8 @@ namespace Stock
         public void LoadData()
         {
 
-            string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
-            SqlConnection conn = new SqlConnection(constring);
+
+            SqlConnection conn = Connection.getConnection();
 
             //Reading Data
             SqlDataAdapter sda = new SqlDataAdapter("Select * from [Stock].[dbo].[Ürünler]", conn);
@@ -114,13 +119,11 @@ namespace Stock
             LoadData();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            button1.Text = "Güncelle";
             idtext.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             isimtext.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             if (dataGridView1.SelectedRows[0].Cells[2].Value.ToString() == "Aktif")
@@ -135,35 +138,78 @@ namespace Stock
 
         }
 
-        private void isimtext_TextChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+
+            DialogResult dialogResult = MessageBox.Show("Ürünü silmek istiyor musunuz", "Ürün silme işlemi", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (Validation())
+                {
+                    SqlConnection conn = Connection.getConnection();
+                    if (ProductExists(conn, idtext.Text))
+                    {
+                        conn.Open();
+                        string sqlcommand = "DELETE FROM [dbo].[Ürünler] WHERE [ÜrünId] = '" + idtext.Text + "'";
+                        SqlCommand cmd = new SqlCommand(sqlcommand, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ürün Bulunamadı");
+
+                    }
+
+                    LoadData();
+                    ResetRecords();
+                }
+            }
+
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ResetRecords()
         {
-            string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
-            SqlConnection conn = new SqlConnection(constring);
-            
-            if (ProductExists(conn, idtext.Text))
+            idtext.Clear();
+            isimtext.Clear();
+            comboBox1.SelectedIndex = -1;
+            button1.Text = "Ekle";
+            idtext.Focus();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ResetRecords();
+        }
+
+        private bool Validation()
+        {
+            bool result = false;
+            if (string.IsNullOrEmpty(idtext.Text))
             {
-                conn.Open();
-                string sqlcommand = "DELETE FROM [dbo].[Ürünler] WHERE [ÜrünId] = '" + idtext.Text + "'";
-                SqlCommand cmd = new SqlCommand(sqlcommand, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                errorProvider1.Clear();
+                errorProvider1.SetError(idtext, "Ürün kodu gereklidir.");
+            }
+            else if (string.IsNullOrEmpty(isimtext.Text))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(isimtext, "Ürün ismi gereklidir.");
+            }
+            else if (comboBox1.SelectedIndex == -1)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(comboBox1, "Durum seçiniz");
+
             }
             else
             {
-                MessageBox.Show("Ürün Bulunamadı");
-
+                result = true;
             }
 
 
-            LoadData();
-
-
-
+            return result;
         }
+
     }
 }

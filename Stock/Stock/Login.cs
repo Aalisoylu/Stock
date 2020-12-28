@@ -43,9 +43,8 @@ namespace Stock
 
             //Check- lo gin id and password
             // SqlConnection con = new SqlConnection();
-            string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
-            SqlConnection conn = new SqlConnection(constring); 
-            
+            SqlConnection conn = Connection.getConnection();
+
             string sqlada = "SELECT* FROM[dbo].[Login] Where Kullanıcı = '"+ textBox1.Text + "' and Şifre = '"+textBox2.Text+"'";
             SqlDataAdapter sda = new SqlDataAdapter(@sqlada,conn);
              

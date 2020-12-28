@@ -29,6 +29,7 @@ namespace Stock
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.isimtext = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -41,7 +42,10 @@ namespace Stock
             this.label3 = new System.Windows.Forms.Label();
             this.idtext = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -60,7 +64,6 @@ namespace Stock
             this.isimtext.Name = "isimtext";
             this.isimtext.Size = new System.Drawing.Size(141, 22);
             this.isimtext.TabIndex = 2;
-            this.isimtext.TextChanged += new System.EventHandler(this.isimtext_TextChanged);
             // 
             // comboBox1
             // 
@@ -98,6 +101,7 @@ namespace Stock
             this.ÜrünKodu.HeaderText = "ÜrünKodu";
             this.ÜrünKodu.MinimumWidth = 6;
             this.ÜrünKodu.Name = "ÜrünKodu";
+            this.ÜrünKodu.ReadOnly = true;
             this.ÜrünKodu.Width = 125;
             // 
             // Ürünİsmi
@@ -106,12 +110,14 @@ namespace Stock
             this.Ürünİsmi.HeaderText = "Ürünİsmi";
             this.Ürünİsmi.MinimumWidth = 6;
             this.Ürünİsmi.Name = "Ürünİsmi";
+            this.Ürünİsmi.ReadOnly = true;
             // 
             // Durum
             // 
             this.Durum.HeaderText = "Durum";
             this.Durum.MinimumWidth = 6;
             this.Durum.Name = "Durum";
+            this.Durum.ReadOnly = true;
             this.Durum.Width = 125;
             // 
             // label1
@@ -149,7 +155,6 @@ namespace Stock
             this.idtext.Name = "idtext";
             this.idtext.Size = new System.Drawing.Size(131, 22);
             this.idtext.TabIndex = 1;
-            this.idtext.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button2
             // 
@@ -161,11 +166,26 @@ namespace Stock
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(832, 60);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(91, 29);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Temizle";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 508);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.idtext);
             this.Controls.Add(this.label3);
@@ -176,9 +196,11 @@ namespace Stock
             this.Controls.Add(this.isimtext);
             this.Controls.Add(this.button1);
             this.Name = "Product";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";
             this.Load += new System.EventHandler(this.Product_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +220,7 @@ namespace Stock
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox idtext;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
