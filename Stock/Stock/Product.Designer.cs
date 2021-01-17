@@ -34,9 +34,6 @@ namespace Stock
             this.isimtext = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ÜrünKodu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ürünİsmi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Durum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +41,9 @@ namespace Stock
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.Ürünkodu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ürünismi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Durum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -82,8 +82,8 @@ namespace Stock
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ÜrünKodu,
-            this.Ürünİsmi,
+            this.Ürünkodu,
+            this.Ürünismi,
             this.Durum});
             this.dataGridView1.Location = new System.Drawing.Point(41, 119);
             this.dataGridView1.Name = "dataGridView1";
@@ -96,38 +96,14 @@ namespace Stock
             this.dataGridView1.TabStop = false;
             this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
             // 
-            // ÜrünKodu
-            // 
-            this.ÜrünKodu.HeaderText = "ÜrünKodu";
-            this.ÜrünKodu.MinimumWidth = 6;
-            this.ÜrünKodu.Name = "ÜrünKodu";
-            this.ÜrünKodu.ReadOnly = true;
-            this.ÜrünKodu.Width = 125;
-            // 
-            // Ürünİsmi
-            // 
-            this.Ürünİsmi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Ürünİsmi.HeaderText = "Ürünİsmi";
-            this.Ürünİsmi.MinimumWidth = 6;
-            this.Ürünİsmi.Name = "Ürünİsmi";
-            this.Ürünİsmi.ReadOnly = true;
-            // 
-            // Durum
-            // 
-            this.Durum.HeaderText = "Durum";
-            this.Durum.MinimumWidth = 6;
-            this.Durum.Name = "Durum";
-            this.Durum.ReadOnly = true;
-            this.Durum.Width = 125;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 4;
-            this.label1.Text = "ÜrünKodu";
+            this.label1.Text = "Ürünkodu";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
@@ -137,7 +113,7 @@ namespace Stock
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Ürünİsmi";
+            this.label2.Text = "Ürünismi";
             // 
             // label3
             // 
@@ -180,6 +156,30 @@ namespace Stock
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // Ürünkodu
+            // 
+            this.Ürünkodu.HeaderText = "Ürünkodu";
+            this.Ürünkodu.MinimumWidth = 6;
+            this.Ürünkodu.Name = "Ürünkodu";
+            this.Ürünkodu.ReadOnly = true;
+            this.Ürünkodu.Width = 125;
+            // 
+            // Ürünismi
+            // 
+            this.Ürünismi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ürünismi.HeaderText = "Ürünismi";
+            this.Ürünismi.MinimumWidth = 6;
+            this.Ürünismi.Name = "Ürünismi";
+            this.Ürünismi.ReadOnly = true;
+            // 
+            // Durum
+            // 
+            this.Durum.HeaderText = "Durum";
+            this.Durum.MinimumWidth = 6;
+            this.Durum.Name = "Durum";
+            this.Durum.ReadOnly = true;
+            this.Durum.Width = 125;
+            // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -212,9 +212,6 @@ namespace Stock
         private System.Windows.Forms.TextBox isimtext;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ÜrünKodu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ürünİsmi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Durum;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -222,5 +219,8 @@ namespace Stock
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ürünkodu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ürünismi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Durum;
     }
 }

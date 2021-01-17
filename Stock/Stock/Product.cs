@@ -28,8 +28,7 @@ namespace Stock
             if (Validation())
             {
                 //sql baglantısı
-                string constring = "Server=.;Database=Stock;Trusted_Connection=True;";
-                SqlConnection conn = new SqlConnection(constring);
+                SqlConnection conn = Connection.getConnection();
                 conn.Open();
                 //Ekleme islemi
 
@@ -41,13 +40,13 @@ namespace Stock
                 if (ProductExists(conn, idtext.Text))
                 {
                     sqlcommand = "UPDATE [dbo].[Ürünler] SET" +
-                        "[ÜrünAd] = '" + isimtext.Text + "'" +
-                        ",[ÜrünBilgi] ='" + status + "'" +
-                        "WHERE [ÜrünId] = '" + idtext.Text + "'";
+                        "[Ürünismi] = '" + isimtext.Text + "'" +
+                        ",[Durum] ='" + status + "'" +
+                        "WHERE [Ürünkodu] = '" + idtext.Text + "'";
                 }
                 else
                 {
-                    sqlcommand = "INSERT INTO[dbo].[Ürünler] ([ÜrünID],[ÜrünAd],[ÜrünBilgi])" +
+                    sqlcommand = "INSERT INTO[dbo].[Ürünler] ([Ürünkodu],[Ürünismi],[Durum])" +
                    " VALUES ('" + idtext.Text + "','" + isimtext.Text + "','" + status + "')";
 
                 }
@@ -68,7 +67,7 @@ namespace Stock
 
         private bool ProductExists(SqlConnection conn, string productCode)
         {
-            SqlDataAdapter sda = new SqlDataAdapter("Select 1 from [Ürünler] WHERE [ÜrünID]='" + productCode + "'", conn);
+            SqlDataAdapter sda = new SqlDataAdapter("Select 1 from [Ürünler] WHERE [Ürünkodu]='" + productCode + "'", conn);
             DataTable dt = new DataTable();
             sda.Fill(dt);
 
@@ -91,10 +90,10 @@ namespace Stock
             foreach (DataRow item in dt.Rows)
             {
                 int n = dataGridView1.Rows.Add();
-                dataGridView1.Rows[n].Cells[0].Value = item["ÜrünID"].ToString();
-                dataGridView1.Rows[n].Cells[1].Value = item["ÜrünAd"].ToString();
+                dataGridView1.Rows[n].Cells[0].Value = item["Ürünkodu"].ToString();
+                dataGridView1.Rows[n].Cells[1].Value = item["Ürünismi"].ToString();
 
-                if ((bool)item["ÜrünBilgi"])
+                if ((bool)item["Durum"])
                 {
                     dataGridView1.Rows[n].Cells[2].Value = "Aktif";
                 }
@@ -150,7 +149,7 @@ namespace Stock
                     if (ProductExists(conn, idtext.Text))
                     {
                         conn.Open();
-                        string sqlcommand = "DELETE FROM [dbo].[Ürünler] WHERE [ÜrünId] = '" + idtext.Text + "'";
+                        string sqlcommand = "DELETE FROM [dbo].[Ürünler] WHERE [Ürünkodu] = '" + idtext.Text + "'";
                         SqlCommand cmd = new SqlCommand(sqlcommand, conn);
                         cmd.ExecuteNonQuery();
                         conn.Close();
@@ -204,6 +203,7 @@ namespace Stock
             }
             else
             {
+                errorProvider1.Clear();
                 result = true;
             }
 

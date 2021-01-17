@@ -28,7 +28,7 @@ namespace Stock
                 {
                     close = false;
                     Application.Exit();
-                }
+                } 
                 else
                 {
                     e.Cancel = true;
@@ -42,6 +42,34 @@ namespace Stock
             pro.MdiParent = this;
             pro.StartPosition = FormStartPosition.CenterScreen;
             pro.Show();
+
+        }
+
+        private void stokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stock stk = new Stock();
+            stk.MdiParent = this;
+            stk.StartPosition = FormStartPosition.CenterScreen;
+            stk.Show();
+        }
+
+        private void ürünListesiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RaporForm.Rapor prod = new RaporForm.Rapor();
+            prod.MdiParent = this;
+            prod.StartPosition = FormStartPosition.CenterScreen;
+            prod.Show();
+
+
+
+        }
+
+        private void stokBilgisiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RaporForm.StokRapor stok = new RaporForm.StokRapor();
+            stok.MdiParent = this;
+            stok.StartPosition = FormStartPosition.CenterScreen;
+            stok.Show();
 
         }
     }

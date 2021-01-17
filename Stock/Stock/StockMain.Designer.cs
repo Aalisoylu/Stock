@@ -68,6 +68,7 @@ namespace Stock
             this.stokToolStripMenuItem.Name = "stokToolStripMenuItem";
             this.stokToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
             this.stokToolStripMenuItem.Text = "Stok";
+            this.stokToolStripMenuItem.Click += new System.EventHandler(this.stokToolStripMenuItem_Click);
             // 
             // raporlarToolStripMenuItem
             // 
@@ -81,14 +82,16 @@ namespace Stock
             // ürünListesiToolStripMenuItem
             // 
             this.ürünListesiToolStripMenuItem.Name = "ürünListesiToolStripMenuItem";
-            this.ürünListesiToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.ürünListesiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.ürünListesiToolStripMenuItem.Text = "Ürün listesi";
+            this.ürünListesiToolStripMenuItem.Click += new System.EventHandler(this.ürünListesiToolStripMenuItem_Click);
             // 
             // stokBilgisiToolStripMenuItem
             // 
             this.stokBilgisiToolStripMenuItem.Name = "stokBilgisiToolStripMenuItem";
-            this.stokBilgisiToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.stokBilgisiToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stokBilgisiToolStripMenuItem.Text = "Stok bilgisi";
+            this.stokBilgisiToolStripMenuItem.Click += new System.EventHandler(this.stokBilgisiToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
